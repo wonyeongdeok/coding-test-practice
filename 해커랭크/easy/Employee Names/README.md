@@ -1,9 +1,5 @@
 # Employee Names
 
-[문제 링크](https://www.hackerrank.com/challenges/name-of-employees/problem?isFullScreen=true)
-
----
-
 ### Problem
 
 Write a query that prints a list of employee names (i.e.: the *name* attribute) from the **Employee** table in alphabetical order.
@@ -22,3 +18,4 @@ SELECT  NAME
  ORDER
     BY  NAME ASC;
 ```
+[문제 링크](https://www.hackerrank.com/challenges/name-of-employees/problem?isFullScreen=true)
