@@ -1,2 +1,0 @@
-SELECT *
-  FROM DATA_TABLE;
