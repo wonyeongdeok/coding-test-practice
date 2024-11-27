@@ -1,5 +1,7 @@
 # Select All
 
+[문제 링크](https://www.hackerrank.com/challenges/select-all-sql/problem?isFullScreen=true)
+
 ### Problem
 
 Query all columns (attributes) for every row in the **CITY** table.
@@ -9,12 +11,3 @@ Query all columns (attributes) for every row in the **CITY** table.
 The **CITY** table is described as follows:
 
 ![image.png](image.png)
-
-### Submission
-
-```sql
-SELECT  *
-  FROM  CITY;
-```
-
-[문제 링크](https://www.hackerrank.com/challenges/select-all-sql/problem?isFullScreen=true)

@@ -1,5 +1,7 @@
 # Population Density Difference
 
+[문제 링크](https://www.hackerrank.com/challenges/population-density-difference/problem)
+
 ### Problem
 
 Query the difference between the maximum and minimum populations in **CITY**.
@@ -9,11 +11,3 @@ Query the difference between the maximum and minimum populations in **CITY**.
 The **CITY** table is described as follows:
 
 ![https://s3.amazonaws.com/hr-challenge-images/8137/1449729804-f21d187d0f-CITY.jpg](https://s3.amazonaws.com/hr-challenge-images/8137/1449729804-f21d187d0f-CITY.jpg)
-
-### Submission
-
-```sql
-SELECT  MAX(POPULATION) - MIN(POPULATION)
-	FROM  CITY;
-```
-[문제 링크](https://www.hackerrank.com/challenges/population-density-difference/problem)
