@@ -1,0 +1,20 @@
+-- RIGHT
+SELECT  DISTINCT(CITY)
+  FROM  STATION
+ WHERE  RIGHT(CITY, 1) NOT IN ('a', 'e', 'i', 'o', 'u');
+
+ /*
+ -- SUBSTRING
+SELECT  DISTINCT(CITY)
+  FROM  STATION
+ WHERE  SUBSTRING(CITY, LENGTH(CITY), 1) NOT IN ('a', 'e', 'i', 'o', 'u');
+  */
+
+/*
+ -- RGEXP
+ SELECT  DISTINCT(CITY)
+   FROM  STATION
+  WHERE  CITY NOT REGEXP '[aeiou]$';
+  */
+  
+  
