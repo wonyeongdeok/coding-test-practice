@@ -54,9 +54,9 @@ The *Binary Tree* below illustrates the sample:
             
             ```sql
             CASE column_name
-            		WHEN value1 THEN result1
-            		WHEN value2 THEN result2
-            		ELSE default_result
+            	WHEN value1 THEN result1
+            	WHEN value2 THEN result2
+            	ELSE default_result
              END
             ```
             
@@ -64,11 +64,11 @@ The *Binary Tree* below illustrates the sample:
             
             ```sql
             SELECT  order_id,
-            			  CASE delivery_status
-            					  WHEN 'pending' THEN 'Order pending'
-            					  WHEN 'completed' THEN 'Order completed'
-            					  ELSE 'Unknown Status'
-            				 END AS delivery_status
+                    CASE delivery_status
+                        WHEN 'pending' THEN 'Order pending'
+                        WHEN 'completed' THEN 'Order completed'
+                        ELSE 'Unknown Status'
+                     END AS delivery_status
               FROM  orders;
             ```
             
@@ -77,21 +77,21 @@ The *Binary Tree* below illustrates the sample:
             
             ```sql
             CASE
-            		WHEN condition1 THEN result1
-            		WHEN condition2 THEN result2
-            		ELSE default_result
-            ELSE
+                WHEN condition1 THEN result1
+                WHEN condition2 THEN result2
+                ELSE default_result
+             END
             ```
             
         - 예제
             
             ```sql
             SELECT  employee_id,
-            				CASE
-            						WHEN salary > 5 AND department = 'IT' THEN 'High IT Salary'
-            						WHEN salary <= 5 AND department = 'HR' THEN 'HR Average Salary'
-            						ELSE 'Other'
-            				 END AS salary_category
+                    CASE
+                        WHEN salary > 5 AND department = 'IT' THEN 'High IT Salary'
+                        WHEN salary <= 5 AND department = 'HR' THEN 'HR Average Salary'
+                        ELSE 'Other'
+                     END AS salary_category
               FROM  employees;
             ```
             
