@@ -107,9 +107,9 @@ The *Binary Tree* below illustrates the sample:
     - **예시**
         
         ```sql
-        SELECT 1 IN (1, 2, NULL); -- 결과: TRUE (1이 리스트에 있음)
-        SELECT 3 IN (1, 2, NULL); -- 결과: FALSE (3이 리스트에 없음)
-        SELECT NULL IN (1, 2, NULL); -- 결과: UNKNOWN (비교값 자체가 NULL이면 UNKNOWN)
+        SELECT 1 IN (1, 2, NULL);     -- 결과: TRUE (1이 리스트에 있음)
+        SELECT 3 IN (1, 2, NULL);     -- 결과: FALSE (3이 리스트에 없음)
+        SELECT NULL IN (1, 2, NULL);  -- 결과: UNKNOWN (비교값 자체가 NULL이면 UNKNOWN)
         ```
         
 - **NOT IN 연산자**
@@ -123,8 +123,8 @@ The *Binary Tree* below illustrates the sample:
     - **예시**
         
         ```sql
-        SELECT 1 NOT IN (1, 2, NULL); -- 결과: UNKNOWN (1이 리스트에 있지만, NULL이 있음)
-        SELECT 3 NOT IN (1, 2, NULL); -- 결과: UNKNOWN (리스트에 NULL이 있음)
-        SELECT 5 NOT IN (1, 2);       -- 결과: TRUE (5는 리스트에 없음)
-        SELECT NULL NOT IN (1, NULL);    -- 결과: UNKNOWN (리스트에 NULL 있음)
+        SELECT 1 NOT IN (1, 2, NULL);  -- 결과: UNKNOWN (1이 리스트에 있지만, NULL이 있음)
+        SELECT 3 NOT IN (1, 2, NULL);  -- 결과: UNKNOWN (리스트에 NULL이 있음)
+        SELECT 5 NOT IN (1, 2);        -- 결과: TRUE (5는 리스트에 없음)
+        SELECT NULL NOT IN (1, NULL);  -- 결과: UNKNOWN (리스트에 NULL 있음)
         ```
