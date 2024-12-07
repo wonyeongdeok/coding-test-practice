@@ -1,0 +1,7 @@
+SELECT  LOCAL AS local
+        ,COUNT(*) AS num_stations
+  FROM  STATION
+ GROUP
+    BY  LOCAL
+ ORDER
+    BY  NUM_STATIONS ASC;
