@@ -6,7 +6,8 @@
 - count employee who have maximum earnings
 */
 
-SELECT  CONCAT(MAX(MONTHS * SALARY), ' ',COUNT(*))
+SELECT  MAX(MONTHS * SALARY)
+        ,COUNT(*))
   FROM  EMPLOYEE
  WHERE  MONTHS * SALARY = (SELECT  MAX(MONTHS * SALARY)
                              FROM  EMPLOYEE);
