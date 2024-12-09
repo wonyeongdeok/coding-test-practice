@@ -10,9 +10,7 @@ SELECT  DR_NAME
         ,MCDP_CD
         ,DATE_FORMAT(HIRE_YMD, '%Y-%m-%d')
   FROM  DOCTOR
- # WHERE  MCDP_CD IN ('CS', 'GS')
- WHERE  MCDP_CD = 'CS'
-    OR  MCDP_CD = 'GS'
+ WHERE  MCDP_CD IN ('CS', 'GS')
  ORDER
     BY  HIRE_YMD DESC
         ,DR_NAME ASC;
