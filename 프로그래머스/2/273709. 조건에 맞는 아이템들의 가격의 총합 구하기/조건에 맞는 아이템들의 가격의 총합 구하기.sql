@@ -1,0 +1,9 @@
+/*
+- 아이템 가격 총합
+- 희귀도가 LEGEND
+- 컬럼명 TOTAL_PRICE
+*/
+
+SELECT  SUM(PRICE) AS TOTAL_PRICE
+  FROM  ITEM_INFO
+ WHERE  RARITY = 'LEGEND';
