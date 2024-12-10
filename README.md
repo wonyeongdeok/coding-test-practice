@@ -1,4 +1,3 @@
-# coding-test-practice
 - HackerRank: MySQL
 - LeetCode: MySQL
 - slovesql: SQLite
