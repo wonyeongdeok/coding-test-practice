@@ -1,0 +1,18 @@
+/*
+도서id, 저자명, 출판일
+조건: 경제 카테고리
+정렬: 출판일 asc
+*/
+
+SELECT
+    BO.BOOK_ID,
+    AU.AUTHOR_NAME,
+    DATE_FORMAT(BO.PUBLISHED_DATE, '%Y-%m-%d') AS PUBLISHED_DATE
+FROM
+    BOOK BO
+LEFT JOIN
+    AUTHOR AU ON BO.AUTHOR_ID = AU.AUTHOR_ID
+WHERE
+    BO.CATEGORY = '경제'
+ORDER BY
+    BO.PUBLISHED_DATE ASC;
