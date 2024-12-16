@@ -1,0 +1,14 @@
+/*
+이름, 이름 쓰인 횟수 조회
+조건: 두 번 이상 쓰인 이름, 이름 없는 동물 집계 제외
+정렬: 이름 순
+*/
+
+SELECT  NAME
+        ,COUNT(NAME)
+  FROM  ANIMAL_INS
+ GROUP
+    BY  NAME
+HAVING  COUNT(NAME) >= 2
+ ORDER
+    BY  NAME ASC;
