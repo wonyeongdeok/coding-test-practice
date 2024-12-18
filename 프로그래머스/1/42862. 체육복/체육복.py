@@ -1,21 +1,27 @@
 """
-앞번호나 뒷번호에 빌려줘서 최대한 많은 학생이 입도록
+출력: 체육복 입을 수 있는 최대 학생 수 => 그리디 서치
 
 n: 전체 학생 수
 lost: 도난당한 학생 번호 배열
 reserve: 여벌의 체육복 가져온 학생 번호 배열
+
+조건
+1) 여벌 체육복을 앞 뒤 번호 학생에게 학생에게 빌려줄 수 있음 -> 
+2) 여벌 체육복이 있다고 확인되지만 도난 기록 있을 수 있음 -> 본인 입을 것만 있기에 빌려줄 수 없음
 """
+
 def solution(n, lost, reserve):
-    # 여벌 체육복을 가진 학생이 도난당한 경우 처리
-    lost_set = set(lost) - set(reserve)
-    reserve_set = set(reserve) - set(lost)
+    answer = 0
     
-    # 체육복 빌려주기
+    lost_set = set(lost) - set(reserve)  # lost의 차집합
+    reserve_set = set(reserve) - set(lost)  # resere의 차집합
+    
     for r in sorted(reserve_set):
-        if r - 1 in lost_set:  # 앞번호 학생에게 빌려줌
+        if r - 1 in lost_set:
             lost_set.remove(r - 1)
-        elif r + 1 in lost_set:  # 뒷번호 학생에게 빌려줌
+        elif r + 1 in lost_set:
             lost_set.remove(r + 1)
     
-    # 전체 학생 수에서 체육복이 없는 학생 수를 뺌
-    return n - len(lost_set)
+    answer = n - len(lost_set)
+    
+    return answer
