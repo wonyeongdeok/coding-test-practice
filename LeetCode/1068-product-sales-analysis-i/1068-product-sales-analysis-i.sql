@@ -1,5 +1,5 @@
 /*
-print: sale_id, product_name, year, price
+print: product_name, year, price
 */
 
 SELECT
