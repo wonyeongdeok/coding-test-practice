@@ -1,4 +1,7 @@
-# Write your MySQL query statement below
+/*
+print: product_id
+condition: low_fats = Y and recyclable = Y
+*/
 SELECT
     PRODUCT_ID
   FROM
