@@ -6,7 +6,7 @@ print: num
 
 -- filter single number
 SELECT
-    COALESCE(MAX(SINGLE_NUM), NULL) AS NUM
+    MAX(SINGLE_NUM) AS NUM
 FROM ( SELECT
             MAX(NUM) AS SINGLE_NUM
         FROM
