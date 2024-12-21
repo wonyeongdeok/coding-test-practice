@@ -8,7 +8,7 @@ and
 
 SELECT
     CUSTOMER_ID,
-    COUNT(*) AS count_no_trans
+    COUNT(*) AS COUNT_NO_TRANS
 FROM
     VISITS V
 LEFT JOIN
