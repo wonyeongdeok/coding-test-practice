@@ -14,4 +14,4 @@ SELECT
          ELSE 'No'
     END AS TRIANGLE
 FROM
-    TRIANGLE;
+    TRIANGLE;       
