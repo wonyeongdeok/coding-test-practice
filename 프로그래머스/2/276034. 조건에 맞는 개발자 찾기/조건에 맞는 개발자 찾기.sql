@@ -1,7 +1,8 @@
 /*
-출력: 개발자 id, 이메일, 이름, 성
-조건: python이나 c# 스킬 가짐
-정렬: ID 오름
+출력: ID, EMAIL, FIRST_NAME, LAST_NAME
+조건:
+- python이나 c# 스킬을 가짐
+정렬: ID asc
 */
 
 SELECT
@@ -13,16 +14,16 @@ FROM
     DEVELOPERS
 WHERE
     SKILL_CODE & (SELECT
-                      CODE
+                    CODE
                   FROM
-                      SKILLCODES
+                    SKILLCODES
                   WHERE
-                      NAME = 'Python')
+                    NAME = 'Python')
     OR SKILL_CODE & (SELECT
                         CODE
                      FROM
-                         SKILLCODES
+                        SKILLCODES
                      WHERE
-                         NAME = 'C#')
+                        NAME = 'C#')
 ORDER BY
     ID ASC;
