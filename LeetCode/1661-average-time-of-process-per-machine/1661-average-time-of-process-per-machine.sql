@@ -1,39 +1,35 @@
 /*
 print: machine_id, processing_time
 condition:
-- time to complete a process = endtime - starttime
-- round up 3 to processing_time
+ - processing_time is average time of each machine
+ - processing_time should be rounded to 3 decimal digits
 */
 
-/*
--- SOL1 --
-SELECT
-    S.MACHINE_iD,
-    ROUND(AVG(E.TIMESTAMP - S.TIMESTAMP), 3) AS PROCESSING_TIME
-FROM
-    (SELECT MACHINE_ID, PROCESS_ID, TIMESTAMP FROM ACTIVITY WHERE ACTIVITY_TYPE = 'START') AS S
-INNER JOIN
-    (SELECT MACHINE_ID, PROCESS_ID, TIMESTAMP FROM ACTIVITY WHERE ACTIVITY_TYPE = 'END') AS E
-ON S.MACHINE_ID = E.MACHINE_ID AND S.PROCESS_ID = E.PROCESS_ID
-GROUP BY
-    S.MACHINE_ID;  
-*/
-
--- SOL2 --
-SELECT
-    MACHINE_ID,
-    ROUND(AVG(END_TIME - START_TIME), 3) AS PROCESSING_TIME
-FROM (
+-- start data
+WITH START_DATA AS (
     SELECT
-        MACHINE_iD,
-        PROCESS_ID,
-        MAX(CASE WHEN ACTIVITY_TYPE = 'START' THEN TIMESTAMP END) AS START_TIME,
-        MAX(CASE WHEN ACTIVITY_TYPE = 'END' THEN TIMESTAMP END) AS END_TIME
+        *
     FROM
         ACTIVITY
-    GROUP BY
-        MACHINE_ID,
-        PROCESS_ID
-) AS GROUP_DATA
+    WHERE
+        ACTIVITY_TYPE = 'START'
+),
+-- END DATA
+END_DATA AS (
+    SELECT
+        *
+    FROM
+        ACTIVITY
+    WHERE
+        ACTIVITY_TYPE = 'END'
+)
+SELECT
+    S.MACHINE_ID,
+    ROUND(AVG(E.TIMESTAMP - S.TIMESTAMP), 3) AS PROCESSING_TIME
+FROM
+    START_DATA S
+JOIN
+    END_DATA E ON S.MACHINE_ID = E.MACHINE_ID
+                  AND S.PROCESS_ID = E.PROCESS_iD
 GROUP BY
-    MACHINE_ID;
+    S.MACHINE_ID;
