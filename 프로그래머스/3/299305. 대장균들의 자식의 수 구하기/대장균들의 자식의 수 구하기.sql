@@ -1,0 +1,17 @@
+/*
+출력: ID, CHILD_COUNT
+조건:
+ - 자식이 없으면 자식 수 0
+정렬: ID ASC
+*/
+SELECT
+    P.ID,
+    COUNT(C.ID) AS CHILD_COUNT
+FROM
+    ECOLI_DATA AS p
+LEFT JOIN
+    ECOLI_DATA AS C ON P.ID = C.PARENT_ID
+GROUP BY
+    P.ID
+ORDER BY
+    P.ID;
