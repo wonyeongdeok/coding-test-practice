@@ -1,0 +1,31 @@
+/*
+출력: CATEGORY, MAX_PRICE, PRODUCT_NAME
+조건:
+ - 식품분류별 가격이 제일 비싼
+ - 식품분류는 '과자', '국', '김치', '식용유'
+정렬: MAX_PRICE DESC
+*/
+WITH CAT_MAX_PRICE AS (
+    SELECT
+        CATEGORY,
+        MAX(PRICE) AS MAX_PRICE
+    FROM
+        FOOD_PRODUCT
+    WHERE
+        CATEGORY IN ('과자', '국', '김치', '식용유')
+    GROUP BY
+        CATEGORY
+)
+
+
+SELECT
+    C.CATEGORY,
+    C.MAX_PRICE,
+    F.PRODUCT_NAME
+FROM
+    FOOD_PRODUCT AS F
+JOIN
+    CAT_MAX_PRICE AS C ON F.CATEGORY = C.CATEGORY
+    AND F.PRICE = C.MAX_PRICE
+ORDER BY
+    MAX_PRICE DESC;
