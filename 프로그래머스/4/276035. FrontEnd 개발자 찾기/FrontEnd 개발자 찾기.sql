@@ -1,0 +1,27 @@
+/*
+출력: ID, EMAIL, FIRST_NAME, LAST_NAME
+조건:
+ - Front End 스킬 가진 개발자 정보 조회
+정렬: ID
+*/
+WITH FRONT_DEVELOPERS AS (
+    SELECT
+        DISTINCT D.ID
+    FROM
+        DEVELOPERS AS D
+    JOIN
+        SKILLCODES AS S ON D.SKILL_CODE & S.CODE
+    WHERE
+        S.CATEGORY = 'Front End'
+)
+SELECT
+    ID,
+    EMAIL,
+    FIRST_NAME,
+    LAST_NAME
+FROM
+    DEVELOPERS
+WHERE
+    ID IN (SELECT ID FROM FRONT_DEVELOPERS)
+ORDER BY
+    ID;
