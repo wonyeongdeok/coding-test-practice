@@ -1,8 +1,8 @@
 /*
 출력: REST_ID, REST_NAME, FOOD_TYPE, FAVORITES, ADDRESS, SCORE
 조건:
- - 서울에 위치한 식당
- - 리뷰 평균 점수는 소수점 세 번째 자리에서 반올림
+ - 서울 위치한 식당 대상
+ - 리뷰 평균점수 소수 세번째 자리에서 반올림
 정렬: SCORE DESC, FAVORITES DESC
 */
 SELECT
@@ -17,7 +17,7 @@ FROM
 JOIN
     REST_REVIEW AS R ON I.REST_ID = R.REST_ID
 WHERE
-    I.ADDRESS LIKE '서울%'
+    LEFT(I.ADDRESS, 2) = '서울'
 GROUP BY
     I.REST_ID,
     I.REST_NAME,
@@ -26,4 +26,4 @@ GROUP BY
     I.ADDRESS
 ORDER BY
     SCORE DESC,
-    FAVORITES DESC;
+    I.FAVORITES DESC;
