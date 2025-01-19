@@ -1,0 +1,14 @@
+/*
+PRINT: USER_ID, LAST_STAMP
+CONDITION:
+ - latest login for all users in the year 2020
+*/
+SELECT
+    USER_ID,
+    MAX(TIME_STAMP) AS LAST_STAMP
+FROM
+    LOGINS
+WHERE
+    YEAR(TIME_STAMP) = 2020
+GROUP BY
+    USER_ID;
