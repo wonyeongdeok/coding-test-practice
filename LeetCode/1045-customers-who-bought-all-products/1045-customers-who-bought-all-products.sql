@@ -4,7 +4,7 @@ conditions:
  - customer who bought all the products
 */
 SELECT
-    C.CUSTOMER_ID
+    DISTINCT C.CUSTOMER_ID
 FROM
     CUSTOMER AS C
 JOIN
@@ -12,4 +12,7 @@ JOIN
 GROUP BY
     C.CUSTOMER_ID
 HAVING
-    COUNT(*) = (SELECT COUNT(PRODUCT_KEY) FROM PRODUCT);
+    COUNT(DISTINCT C.PRODUCT_KEY) = (SELECT
+                                         COUNT(PRODUCT_KEY)
+                                     FROM
+                                         PRODUCT);
