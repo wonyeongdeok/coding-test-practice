@@ -1,0 +1,46 @@
+/*
+PRINT: ID, NUM
+*/
+WITH REQUEST_COUNT AS (
+    SELECT
+        REQUESTER_ID AS ID,
+        COUNT(*) AS NUM
+    FROM
+        REQUESTACCEPTED
+    GROUP BY
+        REQUESTER_ID
+),
+ACCEPT_COUNT AS (
+    SELECT
+        ACCEPTER_ID AS ID,
+        COUNT(*) AS NUM
+    FROM
+        REQUESTACCEPTED
+    GROUP BY
+        ACCEPTER_ID
+),
+UNION_DATA AS (
+    SELECT
+        ID,
+        NUM
+    FROM
+        REQUEST_COUNT
+    
+    UNION ALL
+
+    SELECT
+        ID,
+        NUM
+    FROM
+        ACCEPT_COUNT
+)
+SELECT
+    ID,
+    SUM(NUM) AS NUM
+FROM
+    UNION_DATA
+GROUP BY
+    ID
+ORDER BY
+    SUM(NUM) DESC
+LIMIT 1;
