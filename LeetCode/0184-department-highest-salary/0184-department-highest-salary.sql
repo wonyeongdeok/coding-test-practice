@@ -1,0 +1,24 @@
+/*
+print: DEPARTMENT, EMPLOYEE, SALARY
+conditions:
+ - find the employees who have highest salary in each of the departments
+*/
+WITH RANK_NMBER_DATA AS (
+    SELECT
+        D.NAME AS DEPARTMENT,
+        E.NAME AS EMPLOYEE,
+        E.SALARY,
+        RANK() OVER (PARTITION BY E.DEPARTMENTID ORDER BY E.SALARY DESC) AS RANK_NUMBER
+    FROM
+        EMPLOYEE AS E
+    JOIN
+        DEPARTMENT AS D ON E.DEPARTMENTID = D.ID
+)
+SELECT
+    DEPARTMENT,
+    EMPLOYEE,
+    SALARY
+FROM
+    RANK_NMBER_DATA
+WHERE
+    RANK_NMBER = 1;
