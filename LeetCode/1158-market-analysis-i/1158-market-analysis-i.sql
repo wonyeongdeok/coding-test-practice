@@ -1,0 +1,15 @@
+/*
+print: BUYER_ID, JOIN_DATE, ORDERS_IN_2019
+*/
+SELECT
+    U.USER_ID AS buyer_id,
+    U.JOIN_DATE AS join_date,
+    COUNT(O.ORDER_ID) AS orders_in_2019  
+FROM
+    USERS AS U
+LEFT JOIN
+    ORDERS AS O ON U.USER_ID = O.BUYER_ID
+                AND YEAR(O.ORDER_DATE) = 2019
+GROUP BY
+    U.USER_ID,
+    U.JOIN_DATE;
