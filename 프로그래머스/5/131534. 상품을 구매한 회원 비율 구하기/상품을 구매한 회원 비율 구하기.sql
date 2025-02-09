@@ -1,21 +1,39 @@
 /*
-구매한 상품 총 수를 구하는 게 아니고 구매한 회원수를 구하는 것이므로
-한 회원이 중복 구매를 했더라도 구매한 회원수는 1로 카운트 
+print: YEAR, MONTH, PURCHASED_USERS, PURCHASED_RATIO
+conditions:
+ - 2021년 가입 회원 대상
+ - 상품 구매 회원 수
+ - 상품 구매 회원 비율
+ - 소수 첫짜리까지 반올림
+order
+ - YEAR, MONTH
 */
-SELECT  YEAR(B.SALES_DATE) AS YEAR
-        ,MONTH(B.SALES_DATE) AS MONTH
-        ,COUNT(DISTINCT A.USER_ID) AS PURCHASED_USERS
-        ,ROUND(COUNT(DISTINCT A.USER_ID) / (SELECT  COUNT(*)
-                                              FROM  USER_INFO
-                                             WHERE  YEAR(JOINED) = 2021), 1) AS PURCHASED_RATIO
-  FROM  USER_INFO AS A
- RIGHT  
-  JOIN  ONLINE_SALE AS B
-    ON  A.USER_ID = B.USER_ID
- WHERE  YEAR(A.JOINED) = 2021
- GROUP
-    BY  YEAR(B.SALES_DATE)
-        ,MONTH(B.SALES_DATE)
- ORDER
-    BY  YEAR ASC
-        ,MONTH ASC;
+WITH JOINED_2021 AS (
+    SELECT
+        COUNT(DISTINCT USER_ID) AS JOINED_2021_CNT
+    FROM
+        USER_INFO
+    WHERE
+        YEAR(JOINED) = 2021
+)
+
+SELECT
+    YEAR(O.SALES_DATE),
+    MONTH(O.SALES_DATE),
+    COUNT(DISTINCT O.USER_ID) AS PURCHASE_USERS,
+    ROUND(
+        COUNT(DISTINCT O.USER_ID) / (SELECT JOINED_2021_CNT FROM JOINED_2021)
+    , 1) AS PURCHASE_RATIO
+FROM
+    USER_INFO AS I
+JOIN
+    ONLINE_SALE AS O ON I.USER_ID = O.USER_ID
+WHERE
+    YEAR(I.JOINED) = 2021
+GROUP BY
+    YEAR(O.SALES_DATE),
+    MONTH(O.SALES_DATE)
+ORDER BY
+    YEAR(O.SALES_DATE),
+    MONTH(O.SALES_DATE)
+
