@@ -1,33 +1,30 @@
 /*
 print: fraction
-conditions:
- - fraction of players that logged in again on the day after day they first logged in,
- - rounded to 2 decimal places
- - count the number of players that logged in for at least two consecutive days starting from their first loin date
- - then divide that number by the total number of players
+condition:
+ - the fraction of players that logged again on the day after the day they "first logged in"
+ - round 2 decimal
 */
-WITH FIRST_LOGIN AS (
+WITH FIRST_LOGIN_INFO AS (
     SELECT
         PLAYER_ID,
-        MIN(EVENT_DATE) AS EVENT_DATE
+        EVENT_DATE,
+        ROW_NUMBER() OVER(PARTITION BY PLAYER_ID ORDER BY EVENT_DATE) AS RN
     FROM
         ACTIVITY
-    GROUP BY
-        PLAYER_ID
 ),
-AGAIN_LOGIN AS (
+TARGET AS (
     SELECT
-        DISTINCT A.PLAYER_ID
+        A.PLAYER_ID
     FROM
-        ACTIVITY AS A
+        FIRST_LOGIN_INFO AS F
     JOIN
-        FIRST_LOGIN AS F ON A.PLAYER_ID = F.PLAYER_ID
-    WHERE
-        A.EVENT_DATE = DATE_ADD(F.EVENT_DATE, INTERVAL + 1 DAY)
+        ACTIVITY AS A ON F.PLAYER_ID = A.PLAYER_ID
+                        AND RN = 1
+                        AND A.EVENT_DATE = DATE_ADD(F.EVENT_DATE, INTERVAL 1 DAY)
 )
 SELECT
     ROUND(
-        COUNT(*) / (SELECT COUNT(DISTINCT PLAYER_ID) FROM ACTIVITY)
+        (SELECT COUNT(DISTINCT PLAYER_ID) FROM TARGET) / (COUNT(DISTINCT PLAYER_ID))
     , 2) AS FRACTION
 FROM
-    AGAIN_LOGIN;
+    ACTIVITY;
