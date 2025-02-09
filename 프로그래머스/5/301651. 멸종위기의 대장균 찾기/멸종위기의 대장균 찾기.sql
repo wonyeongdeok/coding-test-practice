@@ -1,0 +1,46 @@
+/*
+print: COUNT, GENERATION
+condition:
+ - 각 세대별 자식이 없는 개체수와 세대
+order
+ - GENERATION
+*/
+WITH RECURSIVE GENERATION_INFO AS (
+    SELECT
+        ID,
+        1 AS GENERATION
+    FROM
+        ECOLI_DATA
+    WHERE
+        PARENT_ID IS NULL
+    
+    UNION ALL
+    
+    SELECT
+        E.ID,
+        G.GENERATION + 1 AS GENERATION
+    FROM
+        GENERATION_INFO AS G
+    JOIN
+        ECOLI_DATA AS E ON G.ID = E.PARENT_ID
+),
+NO_CHILD_INFO AS (
+    SELECT
+        DISTINCT G.ID,
+        G.GENERATION
+    FROM
+        GENERATION_INFO AS G
+    LEFT JOIN
+        ECOLI_DATA AS E ON G.ID = E.PARENT_ID
+    WHERE
+        E.PARENT_ID IS NULL
+)
+SELECT
+    COUNT(*) AS COUNT,
+    GENERATION
+FROM
+    NO_CHILD_INFO
+GROUP BY
+    GENERATION
+ORDER BY
+    GENERATION;
