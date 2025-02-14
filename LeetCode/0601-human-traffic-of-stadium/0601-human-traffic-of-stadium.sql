@@ -4,17 +4,26 @@ condition:
  - three or more rows with consecutive id
  - and people is greater than or equal to 100 
 */
-WITH cte AS (
-    SELECT id, visit_date, people,
-           LAG(people, 1) OVER (ORDER BY id) AS prev_people,
-           LAG(people, 2) OVER (ORDER BY id) AS prev2_people,
-           LEAD(people, 1) OVER (ORDER BY id) AS next_people,
-           LEAD(people, 2) OVER (ORDER BY id) AS next2_people
-    FROM Stadium
+
+WITH LAG_LEAD_DATA AS (
+    SELECT
+        ID,
+        VISIT_DATE,
+        PEOPLE,
+        LAG(PEOPLE, 1) OVER(ORDER BY ID)AS LAG_1_PEOPLE,
+        LAG(PEOPLE, 2) OVER(ORDER BY ID) AS LAG_2_PEOPLE,
+        LEAD(PEOPLE, 1) OVER(ORDER BY ID) AS LEAD_1_PEOPLE,
+        LEAD(PEOPLE, 2) OVER(ORDER BY ID) AS LEAD_2_PEOPLE
+    FROM
+        STADIUM
 )
-SELECT id, visit_date, people
-FROM cte
-WHERE (people >= 100 AND prev_people >= 100 AND prev2_people >= 100)
-   OR (people >= 100 AND prev_people >= 100 AND next_people >= 100)
-   OR (people >= 100 AND next_people >= 100 AND next2_people >= 100)
-ORDER BY visit_date;
+SELECT
+    ID,
+    VISIT_DATE,
+    PEOPLE
+FROM
+    LAG_LEAD_DATA
+WHERE
+    (PEOPLE >= 100 AND LAG_1_PEOPLE >= 100 AND LAG_2_PEOPLE >= 100)
+    OR (PEOPLE >= 100 AND LAG_1_PEOPLE >= 100 AND LEAD_1_PEOPLE >= 100)
+    OR (PEOPLE >= 100 AND LEAD_1_PEOPLE >= 100 AND LEAD_2_PEOPLE >= 100);
