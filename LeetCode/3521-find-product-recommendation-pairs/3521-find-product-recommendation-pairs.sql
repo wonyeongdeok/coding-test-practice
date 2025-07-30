@@ -26,7 +26,6 @@ LEFT JOIN
     ProductInfo pi1 ON p.product1_id = pi1.product_id
 LEFT JOIN
     ProductInfo pi2 On p.product2_id = pi2.product_id
-    
 ORDER BY
     customer_count DESC,
     product1_id,
