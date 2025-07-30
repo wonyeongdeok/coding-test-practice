@@ -15,13 +15,18 @@ WITH pairs AS (
         COUNT(*) >= 3
 )
 SELECT
-    product1_id,
-    product2_id,
-    (SELECT category FROM ProductInfo WHERE product1_id = product_id) AS product1_category,
-    (SELECT category FROM ProductInfo WHERE product2_id = product_id) AS product2_category,
+    p.product1_id,
+    p.product2_id,
+    pi1.category AS product1_category,
+    pi2.category AS product2_category,
     customer_count
 FROM
-    pairs
+    pairs p
+LEFT JOIN
+    ProductInfo pi1 ON p.product1_id = pi1.product_id
+LEFT JOIN
+    ProductInfo pi2 On p.product2_id = pi2.product_id
+    
 ORDER BY
     customer_count DESC,
     product1_id,
