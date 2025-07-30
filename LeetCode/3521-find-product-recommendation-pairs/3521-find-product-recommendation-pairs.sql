@@ -25,18 +25,8 @@ WITH pairs AS (
 SELECT
     product1_id,
     product2_id,
-    (SELECT
-        category
-    FROM
-        ProductInfo
-    WHERE
-        product1_id = product_id) AS product1_category,
-    (SELECT
-        category
-    FROM
-        ProductInfo
-    WHERE
-        product2_id = product_id) AS product2_category,
+    (SELECT category FROM ProductInfo WHERE product1_id = product_id) AS product1_category,
+    (SELECT category FROM ProductInfo WHERE product2_id = product_id) AS product2_category,
     customer_count
 FROM
     pairs
