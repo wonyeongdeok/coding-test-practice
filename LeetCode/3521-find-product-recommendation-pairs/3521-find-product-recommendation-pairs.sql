@@ -19,7 +19,7 @@ SELECT
     p.product2_id,
     pi1.category AS product1_category,
     pi2.category AS product2_category,
-    customer_count
+    p.customer_count
 FROM
     pairs p
 LEFT JOIN
